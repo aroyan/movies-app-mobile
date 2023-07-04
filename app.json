@@ -11,20 +11,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
+    "assetBundlePatterns": ["**/*"],
+    "scheme": "acme",
     "web": {
-      "favicon": "./assets/favicon.png"
+      "bundler": "metro"
     }
   }
 }

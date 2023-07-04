@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const BASE_URL = "https://api.themoviedb.org/3/"
+// Revoke this API KEY later
 const API_KEY = "eea6cf8e79673e103a0a449bc11cf5ef"
 
 const ApiManager = axios.create({
     baseURL: BASE_URL,
     responseType: "json",
-    withCredentials: true,
     delayed: true,
     params: {
         api_key: API_KEY
