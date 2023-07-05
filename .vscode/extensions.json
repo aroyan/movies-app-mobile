@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "wallabyjs.console-ninja",
+        "usernamehw.errorlens",
+        "dsznajder.es7-react-js-snippets",
+        "esbenp.prettier-vscode",
+        "eamodio.gitlens",
+        "meganrogge.template-string-converter",
+        "formulahendry.auto-rename-tag"
+    ]
+}
