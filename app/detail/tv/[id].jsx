@@ -1,12 +1,13 @@
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import { useSearchParams } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TvDetail() {
-  const { id } = useSearchParams();
+	const { id } = useSearchParams();
 
-  return (
-    <View>
-      <Text>TvDetail {id}</Text>
-    </View>
-  );
+	return (
+		<SafeAreaView>
+			<Text>TvDetail {id}</Text>
+		</SafeAreaView>
+	);
 }
