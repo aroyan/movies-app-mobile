@@ -1,11 +1,17 @@
-import { View, Text } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { View, Text, TouchableOpacity } from "react-native";
 
 export default function Profile() {
 	return (
-		<View>
+		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
 			<Text>Profile</Text>
-			<AntDesign name="stepforward" size={24} color="black" />
+
+			<TouchableOpacity>
+				<Text>Login</Text>
+			</TouchableOpacity>
+
+			<TouchableOpacity>
+				<Text>Register</Text>
+			</TouchableOpacity>
 		</View>
 	);
 }

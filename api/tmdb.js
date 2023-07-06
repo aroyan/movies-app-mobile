@@ -1,0 +1,5 @@
+export { MovieNowPlaying } from './MovieNowPlaying'
+export { Trending } from './Trending'
+export { TvOnTheAir } from './TvOnTheAir'
+export { TvPopular } from './TvPopular'
+export { MovieUpcoming } from './MovieUpcoming'

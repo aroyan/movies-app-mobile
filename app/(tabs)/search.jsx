@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Dimensions, FlatList, Text, TextInput, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Stack, useNavigation } from "expo-router";
+import { Stack } from "expo-router";
 
-import { Trending } from "../../api/Trending";
+import { MovieNowPlaying, MovieUpcoming, TvOnTheAir, TvPopular } from "../../api/tmdb";
 import Loading from "../../components/Loading";
-import { CardItem } from "../../components/CardItem";
 import BilibiliCardItem from "../../components/BilibiliCardItem";
 
 const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
@@ -22,58 +20,113 @@ const EmptyMovie = () => (
 );
 
 function Search() {
-	const [trending, setTrending] = useState(null);
+	const [movieNowPlaying, setMovieNowPlaying] = useState(null);
+	const [movieUpcoming, setMovieUpcoming] = useState(null);
+	const [tvOnTheAir, setTvOnTheAir] = useState(null);
+	const [tvPopular, setTvPopular] = useState(null);
 
-	const navigation = useNavigation();
-
+	const { width } = Dimensions.get("screen");
 	useEffect(() => {
-		Trending()
-			.then(response => setTrending(response.data.results))
-			.catch(error => console.error(error));
+		(async () => {
+			const promises = [MovieNowPlaying(), MovieUpcoming(), TvOnTheAir(), TvPopular()];
+
+			try {
+				const results = await Promise.all(promises);
+
+				setMovieNowPlaying(results[0].data.results);
+				setMovieUpcoming(results[1].data.results);
+				setTvOnTheAir(results[2].data.results);
+				setTvPopular(results[3].data.results);
+			} catch (error) {
+				console.error(error);
+			}
+		})();
 	}, []);
 
-	useEffect(() => {
-		navigation.setOptions({
-			headerTitle: "Hellos",
-			headerSearchBarOptions: {
-				placeholder: "Search",
-			},
-		});
-	}, [navigation]);
-
-	if (!trending) {
+	if (!movieNowPlaying) {
 		return <Loading />;
 	}
 
 	return (
-		<ScrollView>
-			<Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 4 }}>Trending this Week</Text>
+		<ScrollView style={{ paddingHorizontal: 8, paddingVertical: 4 }}>
+			<Stack.Screen
+				options={{
+					headerTitleAlign: "center",
+					headerTitle: () => (
+						<View>
+							<TextInput
+								placeholder="Search"
+								style={{
+									borderWidth: 1,
+									borderRadius: 8,
+									height: 40,
+									width: width - 100,
+									padding: 8,
+								}}
+							/>
+						</View>
+					),
+				}}
+			/>
+
+			<Text style={{ fontWeight: "bold", fontSize: 20 }}>Now Playing Movies</Text>
+
 			<FlatList
-				style={{ height: 200 }}
-				data={trending}
+				data={movieNowPlaying}
 				keyExtractor={item => item.id}
 				horizontal
 				showsHorizontalScrollIndicator={false}
 				ListEmptyComponent={EmptyMovie}
 				ItemSeparatorComponent={Separator}
 				renderItem={({ item }) => (
-					<CardItem
-						id={item.id}
-						mediaType={item.media_type}
-						posterUrl={`${BASE_IMAGE_URL}${item.poster_path}`}
+					<BilibiliCardItem
 						key={item.id}
+						posterUrl={`${BASE_IMAGE_URL}${item.poster_path}`}
+						title={item.title ?? item.name}
 					/>
 				)}
 			/>
 
-			<View
-				style={{
-					height: 100,
-				}}
-			/>
+			<Text style={{ fontWeight: "bold", fontSize: 20 }}>Upcoming Movies</Text>
 
 			<FlatList
-				data={trending}
+				data={movieUpcoming}
+				keyExtractor={item => item.id}
+				horizontal
+				showsHorizontalScrollIndicator={false}
+				ListEmptyComponent={EmptyMovie}
+				ItemSeparatorComponent={Separator}
+				renderItem={({ item }) => (
+					<BilibiliCardItem
+						key={item.id}
+						posterUrl={`${BASE_IMAGE_URL}${item.poster_path}`}
+						title={item.title ?? item.name}
+					/>
+				)}
+			/>
+
+			<Text style={{ fontWeight: "bold", fontSize: 20 }}>On The Air TV</Text>
+
+			<FlatList
+				data={tvOnTheAir}
+				keyExtractor={item => item.id}
+				horizontal
+				showsHorizontalScrollIndicator={false}
+				ListEmptyComponent={EmptyMovie}
+				ItemSeparatorComponent={Separator}
+				renderItem={({ item }) => (
+					<BilibiliCardItem
+						key={item.id}
+						posterUrl={`${BASE_IMAGE_URL}${item.poster_path}`}
+						title={item.title ?? item.name}
+					/>
+				)}
+			/>
+
+			<Text style={{ fontWeight: "bold", fontSize: 20 }}>Popular Tv</Text>
+
+			<FlatList
+				data={tvPopular}
 				keyExtractor={item => item.id}
 				horizontal
 				showsHorizontalScrollIndicator={false}

@@ -50,45 +50,6 @@ export default function Home() {
 					/>
 				)}
 			/>
-			<Carousel
-				{...baseOptions}
-				loop
-				data={trending}
-				renderItem={({ item }) => (
-					<CardItem
-						key={item.id}
-						id={item.id}
-						mediaType={item.media_type}
-						posterUrl={`${BASE_IMAGE_URL}${item.poster_path}`}
-					/>
-				)}
-			/>
-			<Carousel
-				{...baseOptions}
-				loop
-				data={trending}
-				renderItem={({ item }) => (
-					<CardItem
-						key={item.id}
-						id={item.id}
-						mediaType={item.media_type}
-						posterUrl={`${BASE_IMAGE_URL}${item.poster_path}`}
-					/>
-				)}
-			/>
-			<Carousel
-				{...baseOptions}
-				loop
-				data={trending}
-				renderItem={({ item }) => (
-					<CardItem
-						key={item.id}
-						id={item.id}
-						mediaType={item.media_type}
-						posterUrl={`${BASE_IMAGE_URL}${item.poster_path}`}
-					/>
-				)}
-			/>
 		</View>
 	);
 }
