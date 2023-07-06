@@ -8,7 +8,7 @@ export const CardItem = ({ id, mediaType, posterUrl, ...animatedViewProps }) => 
 	return (
 		<LongPressGestureHandler>
 			<Animated.View style={{ flex: 1 }} {...animatedViewProps}>
-				<Link href={`/detail/${mediaType}/${id}`} style={{ flex: 1, marginHorizontal: 4 }}>
+				<Link href={`/detail/${mediaType}/${id}`} style={{ flex: 1 }}>
 					<PosterImage posterUrl={posterUrl} />
 				</Link>
 			</Animated.View>

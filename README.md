@@ -5,6 +5,13 @@
 - React Native
 - TMDB API
 
+## Content
+
+### Home
+
+- Movie List [Now Playing, Upcoming]
+- Tv List [Now Playing, Upcoming]
+
 ## Design inspo
 
 - https://www.behance.net/gallery/171629883/Movie-App?tracking_source=search_projects|Movies
