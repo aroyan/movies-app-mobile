@@ -1,13 +1,15 @@
 import ApiManager from "./ApiManager";
 
-export const TvOnTheAir = async (data) => {
+export const MovieDetail = async (id) => {
     try {
-        const result = await ApiManager("tv/on_the_air?language=en-US", {
+        const result = await ApiManager(`movie/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             },
-            data: data,
+            params: {
+                language: 'en-US'
+            }
         });
         return result;
     } catch (error) {

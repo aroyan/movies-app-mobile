@@ -1,8 +1,8 @@
 import ApiManager from "./ApiManager";
 
-export const MovieUpcoming = async (data) => {
+export const MoviePopular = async (data) => {
     try {
-        const result = await ApiManager("movie/upcoming?language=en-US", {
+        const result = await ApiManager("movie/popular?language=en-US", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
